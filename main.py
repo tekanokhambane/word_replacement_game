@@ -9,18 +9,25 @@ first_letters: List[str] = []
 new_words: List[str] = []
 word_list = []
 
-with open("words_dictionary.json") as f:
-    words_dictionary = json.load(f)
-    word_list = list(words_dictionary.keys())
+with open("words_alpha.txt") as f:
+    words_list = f.read().splitlines()
+    word_list = list(words_list)
 
 
-def get_new_word(letter: str, words_list: List[str]):
+def get_new_word(letter: str, words_list: List[str], old_word: str):
     words_starting_with_letter = [
         word for word in words_list if word.startswith(letter.lower())
     ]
     if words_starting_with_letter:
-        new_word = random.choice(words_starting_with_letter)
-        return new_word
+        same_length_words = [
+            word for word in words_starting_with_letter if len(word) == len(old_word)
+        ]
+        if same_length_words:
+            new_word = random.choice(same_length_words)
+            return new_word
+        else:
+            new_word = old_word
+            return new_word
     else:
         return None
 
@@ -34,10 +41,10 @@ def index():
 def process_sentence():
     sentence = request.form["sentence"]
     words = sentence.split()
-    first_letters = [word[0] for word in words]
+    first_letters = [word for word in words]
     new_words.clear()
-    for letter in first_letters:
-        new_word = get_new_word(letter, word_list)
+    for word in first_letters:
+        new_word = get_new_word(word[0], word_list, word)
         if new_word:
             new_words.append(new_word)
     return jsonify({"sentence": sentence, "new_sentence": " ".join(new_words)})
