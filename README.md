@@ -33,7 +33,7 @@ Welcome to the Word Replacement Game! This is a fun and easy-to-play web app whe
 1. **Start the Game:**
    - In the terminal, run:
      ```bash
-     python main.py
+     sh start.sh
      ```
      or
      ```bash
