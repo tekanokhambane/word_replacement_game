@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Word Replacement Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Welcome to the Word Replacement Game!</h1>
+    <input type="text" id="sentenceInput" placeholder="Enter a sentence">
+    <button onclick="sendSentence()">Submit</button>
+    <h2 id="originalSentence"></h2>
+    <h2 id="newSentence"></h2>
+
+    <script>
+        function sendSentence() {
+            var sentence = document.getElementById("sentenceInput").value;
+            $.ajax({
+                type: "POST",
+                url: "/process",
+                data: { sentence: sentence },
+                success: function (data) {
+                    $("#originalSentence").text("Original Sentence: " + data.sentence);
+                    $("#newSentence").text("New Sentence: " + data.new_sentence);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
