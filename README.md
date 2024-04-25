@@ -2,6 +2,9 @@
 
 Welcome to the Word Replacement Game! This is a fun and easy-to-play web app where you can create funny sentences by replacing words with random ones.
 
+<!-- link to image -->
+![word replacement screenshot](https://github.com/tekanokhambane/word_replacement_game/blob/main/.github/Word-Replacement-Game.png)
+
 ## Installation
 
 1. **Download the Game:**
